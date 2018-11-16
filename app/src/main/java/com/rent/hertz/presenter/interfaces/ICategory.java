@@ -10,6 +10,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import rx.Observable;
 
 public interface ICategory {
 
@@ -20,13 +21,13 @@ public interface ICategory {
     Call<Category> update(@Path("idCategory") final Long idCategory, @Body final Category category);
 
     @GET(value="category/list-all")
-    Call<List<Category>> findAll();
+    Observable<List<Category>> findAll();
 
     @GET(value="category/{idCategory}/find")
-    Call<Category> findById(@Path("idCategory") final Long idCategory);
+    Observable<Category> findById(@Path("idCategory") final Long idCategory);
 
     @GET(value="/{idsCategories}/find-all")
-    Call<List<Category>> findById(@Path("idsCategories") final List<Long> idsCategories);
+    Observable<List<Category>> findById(@Path("idsCategories") final List<Long> idsCategories);
 
     @DELETE(value="/{idCategory}/delete")
     void deleteById(@Path("idCategory") final Long idCategory);

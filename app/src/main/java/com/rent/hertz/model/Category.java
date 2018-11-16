@@ -1,8 +1,12 @@
 package com.rent.hertz.model;
 
+import android.support.annotation.NonNull;
+
+import com.rent.hertz.model.interfaces.IModel;
+
 import java.util.Objects;
 
-public class Category {
+public class Category implements IModel {
 
     private long id;
 
@@ -50,7 +54,7 @@ public class Category {
         return Objects.hash(id);
     }
 
-    @Override
+    @NonNull @Override
     public String toString() {
         return "Category{" +
                 "id=" + getId() +

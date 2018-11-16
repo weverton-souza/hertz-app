@@ -7,10 +7,11 @@ import android.util.Log;
 import com.rent.hertz.R;
 import com.rent.hertz.model.Category;
 import com.rent.hertz.presenter.CategoryPresenter;
+import com.rent.hertz.view.interfaces.IServiceListener;
 
 import java.util.Optional;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IServiceListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +20,25 @@ public class MainActivity extends AppCompatActivity {
 
         CategoryPresenter presenter = new CategoryPresenter();
         presenter.findById(1L);
+    }
+
+    @Override
+    public void onComplete(IServiceListener serviceListener) {
+
+    }
+
+    @Override
+    public void startLoading() {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void onError(String errorMessage) {
+
     }
 }
