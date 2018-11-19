@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.rent.hertz.model.Category;
-import com.rent.hertz.utils.QueriesUtils;
+import com.rent.hertz.utils.Queries;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryRepository extends SQLiteOpenHelper {
 
-    private QueriesUtils qUtils = new QueriesUtils("Category");
+    private Queries queries = new Queries("Category");
     public CategoryRepository( Context context) {
         super(context, "hertzdb-mobile", null, 2);
     }
@@ -38,27 +38,26 @@ public class CategoryRepository extends SQLiteOpenHelper {
     }
 
     public void save(final Category category){
-        getWritableDatabase()
-                .insert(qUtils.getTable(), null, this.createCategory(category));
+        getWritableDatabase().insert(queries.getTable(), null,
+                this.createCategory(category));
     }
 
     public void update(final Category category){
         getWritableDatabase()
-                .update(qUtils.getTable(), this.createCategory(category),
+                .update(queries.getTable(), this.createCategory(category),
                         "id=" + category.getId(), null);
     }
 
     public void deleteById(final Long idCategory) {
         getReadableDatabase()
-                .delete(qUtils.getTable(),"id=" + idCategory, null);
+                .delete(queries.getTable(),"id=" + idCategory, null);
     }
 
     public List<Category> findAll() {
         Cursor cursor = getReadableDatabase()
-                .rawQuery(qUtils.getQueryFindAll(), null);
+                .rawQuery(queries.getQueryFindAll(), null);
 
         List<Category> categories = new ArrayList<>();
-
         while ( cursor.moveToNext() ) { categories.add( createCategory(cursor) ); }
 
         cursor.close();
@@ -68,7 +67,7 @@ public class CategoryRepository extends SQLiteOpenHelper {
     public Category findById(final Long idCategory){
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery( qUtils
+        Cursor cursor = db.rawQuery( queries
                 .getQueryFindById(idCategory), null);
 
         cursor.moveToFirst();

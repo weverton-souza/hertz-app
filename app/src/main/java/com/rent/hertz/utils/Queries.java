@@ -1,11 +1,11 @@
 package com.rent.hertz.utils;
 
 
-public class QueriesUtils {
+public class Queries {
 
     private String table;
 
-    public QueriesUtils(String table) {
+    public Queries(String table) {
         this.table = table;
     }
 
