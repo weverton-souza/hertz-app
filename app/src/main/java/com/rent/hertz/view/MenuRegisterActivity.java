@@ -19,7 +19,7 @@ public class MenuRegisterActivity extends Activity {
         findViewById( R.id.btnRegisterCategory )
         .setOnClickListener(v -> {
                 Intent intent = new Intent(MenuRegisterActivity.this,
-                        CategoryActivity.class);
+                        CategoryActivityList.class);
 
                 startActivity(intent);
             }

@@ -13,17 +13,18 @@
         tools:layout_editor_absoluteY="8dp" />
 
     <Button
+        android:id="@+id/btnAddNewCategory"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:elevation="6dp"
         android:background="@drawable/add"
-        android:textColor="#ffffff"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
         android:text="@string/add"
-        android:textSize="30sp"
-        android:stateListAnimator="@null"/>
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
 
 </RelativeLayout>

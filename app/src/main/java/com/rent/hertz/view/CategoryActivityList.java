@@ -1,9 +1,11 @@
 package com.rent.hertz.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.rent.hertz.R;
@@ -30,5 +32,12 @@ public class CategoryActivityList extends Activity {
         textView.setAdapter(arrayAdapter);
 
         this.categoryRepository.close();
+
+        findViewById( R.id.btnAddNewCategory )
+            .setOnClickListener( v -> {
+                Intent intent = new Intent(CategoryActivityList.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        );
     }
 }
