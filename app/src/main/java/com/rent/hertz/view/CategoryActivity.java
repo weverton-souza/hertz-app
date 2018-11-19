@@ -1,5 +1,6 @@
 package com.rent.hertz.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,9 +39,17 @@ public class CategoryActivity extends AppCompatActivity {
                 );
 
                 this.categoryRepository.close();
+                Intent intent = new Intent(CategoryActivity.this,
+                        CategoryActivityList.class);
+                startActivity(intent);
+
+                Toast.makeText(CategoryActivity.this, "Categoria salva!",
+                    Toast.LENGTH_SHORT).show();
+
                 return true;
             }
         );
+
     }
 
     @Override

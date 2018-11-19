@@ -14,50 +14,48 @@
         android:id="@+id/txtViewNameCategory"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:fontFamily="@font/andada"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/name_category"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp"/>
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/edtTxtDescripCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:fontFamily="@font/andada"
         android:inputType="text"
-        android:textSize="24sp"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColorLink="@android:color/black" />
+        android:textColorLink="@color/colorPrimary"
+        android:textSize="24sp"
+        android:theme="@style/EditTextTheme" />
 
     <TextView
         android:id="@+id/txtViewPriceCategory"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:fontFamily="@font/andada"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/price_category"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp"/>
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/edtTxtPriceCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:inputType="text|numberDecimal"
+        android:inputType="numberDecimal"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColorLink="@color/colorPrimary"
         android:textSize="24sp"
-        android:importantForAutofill="no" />
+        android:theme="@style/EditTextTheme" />
 
 </LinearLayout>
