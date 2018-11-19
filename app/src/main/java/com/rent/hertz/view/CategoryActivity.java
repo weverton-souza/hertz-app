@@ -1,28 +1,38 @@
 package com.rent.hertz.view;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.widget.EditText;
 
-import com.rent.hertz.view.interfaces.IServiceListener;
+import com.rent.hertz.R;
+import com.rent.hertz.model.Category;
+import com.rent.hertz.repository.CategoryRepository;
 
-public class CategoryActivity extends AppCompatActivity implements IServiceListener {
+public class CategoryActivity extends Activity {
 
-    @Override
-    public void onComplete(IServiceListener serviceListener) {
-
-    }
-
-    @Override
-    public void startLoading() {
-
-    }
+    private CategoryRepository categoryRepository;
 
     @Override
-    public void stopLoading() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_category);
 
-    }
+        findViewById( R.id.btnSaveCategory )
+        .setOnClickListener( v -> {
+                this.categoryRepository = new CategoryRepository(this);
+                final EditText txtDescriptionCategory = findViewById( R.id.edtTxtDescripCategory );
+                final EditText txtPriceCategory =  findViewById( R.id.edtTxtPriceCategory );
 
-    @Override
-    public void onError(String errorMessage) {
+                this.categoryRepository.save(
+                        new Category()
+                            .setDescription( txtDescriptionCategory.getText().toString() )
+                            .setPrice( Double.valueOf(txtPriceCategory.getText().toString()) )
+                );
 
+                this.categoryRepository.close();
+            }
+        );
     }
 }

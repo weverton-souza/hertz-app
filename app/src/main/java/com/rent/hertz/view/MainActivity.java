@@ -1,44 +1,18 @@
 package com.rent.hertz.view;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.rent.hertz.R;
-import com.rent.hertz.model.Category;
-import com.rent.hertz.presenter.CategoryPresenter;
-import com.rent.hertz.view.interfaces.IServiceListener;
 
-import java.util.Optional;
-
-public class MainActivity extends AppCompatActivity implements IServiceListener {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        CategoryPresenter presenter = new CategoryPresenter();
-        presenter.findById(1L);
-    }
-
-    @Override
-    public void onComplete(IServiceListener serviceListener) {
-
-    }
-
-    @Override
-    public void startLoading() {
-
-    }
-
-    @Override
-    public void stopLoading() {
-
-    }
-
-    @Override
-    public void onError(String errorMessage) {
-
+        Intent intent = new Intent(MainActivity.this, CategoryActivityList.class);
+        startActivity(intent);
     }
 }

@@ -54,12 +54,15 @@ public class Category implements IModel {
         return Objects.hash(id);
     }
 
-    @NonNull @Override
-    public String toString() {
+    public String toJson() {
         return "Category{" +
                 "id=" + getId() +
                 ", price=" + getPrice() +
                 '}';
     }
 
+    @NonNull @Override
+    public String toString() {
+        return getId() + " - " + getDescription() + " - " + getPrice();
+    }
 }

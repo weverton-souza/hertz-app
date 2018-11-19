@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">hertz</string>
+    <string name="app_name">Hertz Locadora de Carros</string>
+    <string name="name_category">Nome</string>
+    <string name="price_category">Preço</string>
+    <string name="save_category">Salvar Categoria</string>
+    <string name="register_category">Cadastrar Categoria</string>
+    <string name="title_register_category">Cadastro Categoria</string>
+    <string name="categories">Categorias</string>
+    <string name="add">+</string>
 </resources>
