@@ -7,12 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.rent.hertz.model.Category;
+import com.rent.hertz.utils.QueriesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryRepository extends SQLiteOpenHelper {
 
+    private QueriesUtils qUtils = new QueriesUtils("Category");
     public CategoryRepository( Context context) {
         super(context, "hertzdb-mobile", null, 2);
     }
@@ -36,67 +38,63 @@ public class CategoryRepository extends SQLiteOpenHelper {
     }
 
     public void save(final Category category){
-
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues data = new ContentValues();
-
-        data.put("description", category.getDescription());
-        data.put("price", category.getPrice());
-
-        db.insert("category", null, data);
+        getWritableDatabase()
+                .insert(qUtils.getTable(), null, this.createCategory(category));
     }
 
-//    public void findById(final Long idCategory){
-//        return categoryRepository.findById(idCategory);
-//    }
-//
-//    public void findById(final Iterable<Long> idsCategories){
-//        return categoryRepository.findAllById(idsCategories);
-//    }
-//
+    public void update(final Category category){
+        getWritableDatabase()
+                .update(qUtils.getTable(), this.createCategory(category),
+                        "id=" + category.getId(), null);
+    }
+
+    public void deleteById(final Long idCategory) {
+        getReadableDatabase()
+                .delete(qUtils.getTable(),"id=" + idCategory, null);
+    }
+
     public List<Category> findAll() {
+        Cursor cursor = getReadableDatabase()
+                .rawQuery(qUtils.getQueryFindAll(), null);
 
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor c = db.rawQuery("SELECT * FROM category", null);
         List<Category> categories = new ArrayList<>();
 
-        while ( c.moveToNext() ) {
+        while ( cursor.moveToNext() ) { categories.add( createCategory(cursor) ); }
 
-            Integer id = Integer.parseInt( c.getString(c.getColumnIndex("id")));
-            String descpt = c.getString(c.getColumnIndex("description"));
-            Double price  = Double.parseDouble( c.getString(c.getColumnIndex("price")));
-
-            categories.add(
-                    new Category()
-                        .setId( id )
-                        .setDescription( descpt )
-                        .setPrice( price ) );
-        }
-
-        c.close();
+        cursor.close();
         return categories;
     }
 
-    public Category deleteById(final Long idCategory) {
+    public Category findById(final Long idCategory){
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM category WHERE id = %d", null);
+        Cursor cursor = db.rawQuery( qUtils
+                .getQueryFindById(idCategory), null);
 
-        Integer id = Integer.parseInt(c.getString(c.getColumnIndex("id")));
-        String descpt = c.getString(c.getColumnIndex("description"));
-        Double price = Double.parseDouble(c.getString(c.getColumnIndex("price")));
+        cursor.moveToFirst();
+        Category category = createCategory(cursor);
+        cursor.close();
 
-        c.close();
-        return new Category()
-                .setId(id)
-                .setDescription(descpt)
-                .setPrice(price);
+        return category;
     }
-//
-//    public void deleteAllById(final Iterable<Category> categories){
-//        categoryRepository.deleteAll(categories);
-//    }
 
+    private ContentValues createCategory(Category model) {
+        ContentValues data = new ContentValues();
 
+        if(model.getId() != 0)
+            data.put("id", model.getId());
+        data.put("description", model.getDescription());
+        data.put("price", model.getPrice());
+
+        return data;
+    }
+
+    private Category createCategory(Cursor cursor) {
+        Integer id = Integer.parseInt( cursor.getString(cursor.getColumnIndex("id")));
+        String descpt = cursor.getString(cursor.getColumnIndex("description"));
+        Double price  = Double.parseDouble( cursor.getString(cursor.getColumnIndex("price")));
+
+        return new Category()
+                    .setId( id ).setDescription( descpt ).setPrice( price );
+    }
 }

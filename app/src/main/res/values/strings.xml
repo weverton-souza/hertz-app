@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Hertz Locadora de Carros</string>
     <string name="name_category">Nome</string>
+    <string name="name_custumer">Nome Cliente</string>
     <string name="price_category">Preço</string>
+    <string name="document_customer">Documento</string>
     <string name="save_category">Salvar Categoria</string>
+    <string name="save_customer">Salvar Cliente</string>
     <string name="register_category">Cadastrar Categoria</string>
+    <string name="register_customer">Cadastrar Cliente</string>
     <string name="menu_register_category">Cadastro Categoria</string>
+    <string name="menu_register_customer">Cadastro Cliente</string>
     <string name="categories">Categorias</string>
+    <string name="customers">Clientes</string>
     <string name="add">+</string>
     <string name="confirm_save">Ok</string>
     <string name="icon_to_save">Icon to save</string>

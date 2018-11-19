@@ -5,7 +5,6 @@
     android:minHeight="?attr/actionBarSize"
     android:theme="?attr/actionBarTheme"
     app:titleTextColor="@android:color/white"
-    app:title="@string/menu_register_category"
     android:textSize="24sp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" />

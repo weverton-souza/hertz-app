@@ -13,30 +13,39 @@ import com.rent.hertz.repository.CategoryRepository;
 
 public class CategoryActivityList extends AppCompatActivity {
 
-    private CategoryRepository categoryRepository;
+    private ListView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_list);
 
-        this.categoryRepository = new CategoryRepository(this);
-
-        ArrayAdapter<Category> arrayAdapter =
-                new ArrayAdapter<>(this,
-                        android.R.layout.simple_list_item_1,
-                        this.categoryRepository.findAll());
-
-        ListView textView = findViewById(R.id.txtViewCategories);
-        textView.setAdapter(arrayAdapter);
-
-        this.categoryRepository.close();
+        this.textView = findViewById(R.id.txtViewCategories);
 
         findViewById( R.id.btnAddNewCategory )
             .setOnClickListener( v -> {
+                loadCategory();
                 Intent intent = new Intent(CategoryActivityList.this, CategoryActivity.class);
                 startActivity(intent);
             }
         );
+    }
+
+    private void loadCategory() {
+        CategoryRepository categoryRepository = new CategoryRepository(this);
+
+        ArrayAdapter<Category> arrayAdapter =
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_1,
+                        categoryRepository.findAll());
+
+        this.textView.setAdapter(arrayAdapter);
+        categoryRepository.close();
+    }
+
+    @Override
+    protected void onResume()  {
+        super.onResume();
+        loadCategory();
     }
 }
