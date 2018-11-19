@@ -1,15 +1,13 @@
 package com.rent.hertz.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import com.rent.hertz.R;
-import com.rent.hertz.model.Category;
-import com.rent.hertz.repository.CategoryRepository;
 
-public class MenuRegisterActivity extends Activity {
+public class MenuRegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

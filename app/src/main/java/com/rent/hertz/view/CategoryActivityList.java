@@ -1,18 +1,17 @@
 package com.rent.hertz.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.rent.hertz.R;
 import com.rent.hertz.model.Category;
 import com.rent.hertz.repository.CategoryRepository;
 
-public class CategoryActivityList extends Activity {
+public class CategoryActivityList extends AppCompatActivity {
 
     private CategoryRepository categoryRepository;
 

@@ -4,7 +4,9 @@
     <string name="price_category">Preço</string>
     <string name="save_category">Salvar Categoria</string>
     <string name="register_category">Cadastrar Categoria</string>
-    <string name="title_register_category">Cadastro Categoria</string>
+    <string name="menu_register_category">Cadastro Categoria</string>
     <string name="categories">Categorias</string>
     <string name="add">+</string>
+    <string name="confirm_save">Ok</string>
+    <string name="icon_to_save">Icon to save</string>
 </resources>
