@@ -12,52 +12,10 @@
         android:layout_height="wrap_content"
         app:title="@string/menu_register_category"/>
 
-    <TextView
-        android:id="@+id/txtViewNameCategory"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp"
-        android:text="@string/name_category"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp" />
+    <include
+        layout="@layout/edit_text_layout_name_category" />
 
-    <EditText
-        android:id="@+id/edtTxtDescripCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="text"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColorLink="@color/colorPrimary"
-        android:textSize="24sp"
-        android:theme="@style/EditTextTheme" />
-
-    <TextView
-        android:id="@+id/txtViewPriceCategory"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp"
-        android:text="@string/price_category"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/edtTxtPriceCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="numberDecimal"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColorLink="@color/colorPrimary"
-        android:textSize="24sp"
-        android:theme="@style/EditTextTheme" />
+    <include
+        layout="@layout/edit_text_layout" />
 
 </LinearLayout>

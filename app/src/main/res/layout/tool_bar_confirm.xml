@@ -7,4 +7,31 @@
     app:titleTextColor="@android:color/white"
     android:textSize="24sp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="35dp"
+        android:paddingTop="15dp"
+        android:textSize="16dp"
+        android:text="Salvar"
+        android:background="@android:color/transparent"
+        android:textColor="@color/editText"
+        android:layout_gravity="left"
+    />
+
+    <Button
+    android:id="@+id/btnCancel"
+    android:layout_width="150dp"
+    android:layout_height="match_parent"
+    android:paddingTop="15dp"
+    android:text="Cancelar"
+    android:textSize="16dp"
+    android:layout_marginEnd="30dp"
+    android:textColor="@color/editText"
+    android:background="@android:color/transparent"
+    android:layout_gravity="right"
+    />
+</android.support.v7.widget.Toolbar>
