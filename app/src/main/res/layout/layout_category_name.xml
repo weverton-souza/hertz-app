@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/edtTextDescriptionCategory"
+            android:id="@+id/edtTextDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"

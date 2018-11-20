@@ -13,9 +13,9 @@
         app:title="@string/menu_register_category"/>
 
     <include
-        layout="@layout/edit_text_layout_name_category" />
+        layout="@layout/layout_category_name" />
 
     <include
-        layout="@layout/edit_text_layout" />
+        layout="@layout/layout_category_price" />
 
 </LinearLayout>

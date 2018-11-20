@@ -22,32 +22,44 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryRepository categoryRepository;
     private  EditText txtDescriptionCategory;
     private EditText txtPriceCategory;
+    private Long idCategory = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Long idCategory = null;
         setContentView(R.layout.activity_category);
+
+        Intent intent = getIntent();
+        Category category = (Category) intent.getSerializableExtra("category");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         Button btnSave = findViewById(R.id.btnSave);
         Button btnCancel = findViewById(R.id.btnCancel);
-        this.txtDescriptionCategory = findViewById( R.id.edtTextDescriptionCategory );
-//        this.txtPriceCategory =  findViewById( R.id.edtTxtPriceCategory );
+        this.txtDescriptionCategory = findViewById( R.id.edtTextDescription );
+        this.txtPriceCategory =  findViewById( R.id.textInpEdtTextPrice );
         setSupportActionBar(toolbar);
 
-        btnSave.setOnClickListener( v -> {
+        if(category != null) {
+            this.idCategory = category.getId();
+            this.txtDescriptionCategory.setText(category.getDescription());
+            this.txtPriceCategory.setText(String.valueOf( category.getPrice()));
+        }
+
+        btnSave.setOnClickListener(v -> {
 
                 this.categoryRepository = new CategoryRepository(this);
-                this.categoryRepository.save(
+                this.categoryRepository.saveOrUpdate(
                     new Category()
+                            .setId(this.idCategory)
                             .setDescription( this.txtDescriptionCategory.getText().toString() )
                             .setPrice( Double.valueOf( this.txtPriceCategory.getText().toString()) )
                 );
 
                 this.categoryRepository.close();
-                Intent intent = new Intent(CategoryActivity.this,
-                        CategoryActivityList.class);
-                startActivity(intent);
+
+                startActivity(new Intent(CategoryActivity.this,
+                        CategoryActivityList.class));
 
                 Toast.makeText(CategoryActivity.this, "Categoria salva!",
                     Toast.LENGTH_SHORT).show();
@@ -55,14 +67,10 @@ public class CategoryActivity extends AppCompatActivity {
         );
 
         btnCancel.setOnClickListener( v -> {
-                Intent intent = new Intent(CategoryActivity.this,
-                        CategoryActivityList.class);
-                startActivity(intent);
+                startActivity(new Intent(CategoryActivity.this,
+                        CategoryActivityList.class));
             }
         );
-
-        TextInputLayout til = findViewById(R.id.txtInputEdtTexPrice);
-        TextInputEditText tiet = findViewById(R.id.textInpEdtTextPrice);
 
     }
 }

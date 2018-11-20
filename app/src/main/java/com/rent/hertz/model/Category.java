@@ -2,23 +2,22 @@ package com.rent.hertz.model;
 
 import android.support.annotation.NonNull;
 
-import com.rent.hertz.model.interfaces.IModel;
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Category implements IModel {
+public class Category implements Serializable {
 
-    private long id;
+    private Long id;
 
     private String description;
 
     private Double price;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public Category setId(long id) {
+    public Category setId(Long id) {
         this.id = id;
         return this;
     }

@@ -37,12 +37,21 @@ public class CategoryRepository extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void save(final Category category){
+    public void saveOrUpdate(Category category) {
+        if (category.getId() == null) {
+            category.setId(0L);
+            save(category);
+        } else {
+            update(category);
+        }
+    }
+
+    private void save(final Category category){
         getWritableDatabase().insert(queries.getTable(), null,
                 this.createCategory(category));
     }
 
-    public void update(final Category category){
+    private void update(final Category category){
         getWritableDatabase()
                 .update(queries.getTable(), this.createCategory(category),
                         "id=" + category.getId(), null);
@@ -89,7 +98,7 @@ public class CategoryRepository extends SQLiteOpenHelper {
     }
 
     private Category createCategory(Cursor cursor) {
-        Integer id = Integer.parseInt( cursor.getString(cursor.getColumnIndex("id")));
+        Long id = Long.parseLong( cursor.getString(cursor.getColumnIndex("id")));
         String descpt = cursor.getString(cursor.getColumnIndex("description"));
         Double price  = Double.parseDouble( cursor.getString(cursor.getColumnIndex("price")));
 
