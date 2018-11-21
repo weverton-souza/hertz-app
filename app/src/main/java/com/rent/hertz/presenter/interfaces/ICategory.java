@@ -8,17 +8,18 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import rx.Observable;
 
 public interface ICategory {
 
-    @GET(value="category/save")
+    @POST(value="category/save")
     Call<Category> save(@Body final Category category);
 
     @PUT(value="category/{idCategory}/update")
-    Call<Category> update(@Path("idCategory") final Long idCategory, @Body final Category category);
+    Call<Category> update(@Path("idCategory") final String idCategory, @Body final Category category);
 
     @GET(value="category/list-all")
     Observable<List<Category>> findAll();

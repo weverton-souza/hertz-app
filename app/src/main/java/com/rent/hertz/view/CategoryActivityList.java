@@ -66,11 +66,6 @@ public class CategoryActivityList extends AppCompatActivity {
                     CategoryActivity.class);
             intent.putExtra("category", category);
             startActivity(intent);
-
-            this.categoryRepository = new CategoryRepository(this);
-            this.categoryRepository.saveOrUpdate(category);
-            this.categoryRepository.close();
-
             return false;
         });
 

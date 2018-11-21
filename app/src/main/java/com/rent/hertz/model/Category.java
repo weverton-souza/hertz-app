@@ -7,17 +7,17 @@ import java.util.Objects;
 
 public class Category implements Serializable {
 
-    private Long id;
+    private String id;
 
     private String description;
 
     private Double price;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public Category setId(Long id) {
+    public Category setId(String id) {
         this.id = id;
         return this;
     }

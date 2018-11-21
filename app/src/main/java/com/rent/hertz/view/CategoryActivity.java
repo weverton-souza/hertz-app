@@ -22,7 +22,7 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryRepository categoryRepository;
     private  EditText txtDescriptionCategory;
     private EditText txtPriceCategory;
-    private Long idCategory = null;
+    private String idCategory = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

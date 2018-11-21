@@ -7,23 +7,32 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.rent.hertz.model.Category;
+import com.rent.hertz.presenter.interfaces.ICategory;
 import com.rent.hertz.utils.Queries;
+import com.rent.hertz.utils.RetrofitConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoryRepository extends SQLiteOpenHelper {
 
     private Queries queries = new Queries("Category");
+    private RetrofitConfig retrofit;
+
     public CategoryRepository( Context context) {
-        super(context, "hertzdb-mobile", null, 2);
+        super(context, "hertzdb-mobile", null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql =
                "CREATE TABLE category ( " +
-                       "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                       "id CHAR(36) PRIMARY KEY, " +
                        "description TEXT DEFAULT NULL, " +
                        "price REAL DEFAULT NULL )";
 
@@ -39,7 +48,7 @@ public class CategoryRepository extends SQLiteOpenHelper {
 
     public void saveOrUpdate(Category category) {
         if (category.getId() == null) {
-            category.setId(0L);
+            category.setId(UUID.randomUUID().toString());
             save(category);
         } else {
             update(category);
@@ -47,19 +56,63 @@ public class CategoryRepository extends SQLiteOpenHelper {
     }
 
     private void save(final Category category){
+
+        RetrofitConfig retrofit = new RetrofitConfig();
+
+        //Salvando no SQLite.
         getWritableDatabase().insert(queries.getTable(), null,
                 this.createCategory(category));
+
+        //Salvando no servidor.
+        retrofit.getRetrofit()
+                .create(ICategory.class)
+                .save(category)
+        .enqueue(new Callback<Category>() {
+            @Override
+            public void onResponse(Call<Category> call, Response<Category> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Category> call, Throwable t) {
+
+            }
+        });
     }
 
     private void update(final Category category){
+
+        RetrofitConfig retrofit = new RetrofitConfig();
+
+        //Salvando no SQLite.
+        String whereClause = "id = ?";
+        String[] whereParams = { category.getId() };
         getWritableDatabase()
-                .update(queries.getTable(), this.createCategory(category),
-                        "id=" + category.getId(), null);
+            .update(queries.getTable(), this.createCategory(category), whereClause, whereParams);
+
+        //Salvando no servidor.
+        retrofit.getRetrofit()
+                .create(ICategory.class)
+                .update(category.getId(), category)
+        .enqueue(new Callback<Category>() {
+            @Override
+            public void onResponse(Call<Category> call, Response<Category> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Category> call, Throwable t) {
+
+            }
+        });
     }
 
-    public void deleteById(final Long idCategory) {
+    public void deleteById(final String idCategory) {
+
+        String whereClause = "id = ?";
+        String[] whereParams = { idCategory };
         getReadableDatabase()
-                .delete(queries.getTable(),"id=" + idCategory, null);
+                .delete(queries.getTable(),whereClause, whereParams);
     }
 
     public List<Category> findAll() {
@@ -73,23 +126,10 @@ public class CategoryRepository extends SQLiteOpenHelper {
         return categories;
     }
 
-    public Category findById(final Long idCategory){
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor cursor = db.rawQuery( queries
-                .getQueryFindById(idCategory), null);
-
-        cursor.moveToFirst();
-        Category category = createCategory(cursor);
-        cursor.close();
-
-        return category;
-    }
-
     private ContentValues createCategory(Category model) {
         ContentValues data = new ContentValues();
 
-        if(model.getId() != 0)
+        if(model.getId() != null)
             data.put("id", model.getId());
         data.put("description", model.getDescription());
         data.put("price", model.getPrice());
@@ -98,7 +138,7 @@ public class CategoryRepository extends SQLiteOpenHelper {
     }
 
     private Category createCategory(Cursor cursor) {
-        Long id = Long.parseLong( cursor.getString(cursor.getColumnIndex("id")));
+        String id =  cursor.getString(cursor.getColumnIndex("id"));
         String descpt = cursor.getString(cursor.getColumnIndex("description"));
         Double price  = Double.parseDouble( cursor.getString(cursor.getColumnIndex("price")));
 

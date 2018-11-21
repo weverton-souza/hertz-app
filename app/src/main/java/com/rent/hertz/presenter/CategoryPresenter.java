@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Observable;
 
 public class CategoryPresenter {
@@ -19,14 +21,16 @@ public class CategoryPresenter {
         this.retrofit = new RetrofitConfig();
     }
 
-    public Call<Category> save(Category category) {
-        return retrofit.getRetrofit()
-                .create(ICategory.class)
-                .save(category);
+    public void save(Category category) {
+        retrofit.getRetrofit()
+                        .create(ICategory.class)
+                        .save(category);
     }
 
-    public Call<Category> update(Long idCategory, Category category) {
-        return null;
+    public void update(Long idCategory, Category category) {
+//        retrofit.getRetrofit()
+//                .create(ICategory.class)
+//                .update(idCategory, category);
     }
 
     public Call<List<Category>> findAll() {
