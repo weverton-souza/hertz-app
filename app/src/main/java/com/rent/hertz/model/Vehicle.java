@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Vehicle {
 
-    private long id;
+    private String id;
 
     private Manufacturer make;
 
@@ -13,11 +13,11 @@ public class Vehicle {
     private Category category;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Vehicle setId(long id) {
+    public Vehicle setId(String id) {
         this.id = id;
         return this;
     }

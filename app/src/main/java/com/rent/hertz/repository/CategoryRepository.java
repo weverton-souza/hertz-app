@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import com.rent.hertz.model.Category;
 import com.rent.hertz.presenter.interfaces.ICategory;
@@ -19,31 +20,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoryRepository extends SQLiteOpenHelper {
+public class CategoryRepository extends DataBaseHelper {
 
-    private Queries queries = new Queries("Category");
+    private Queries queries = new Queries("category");
     private RetrofitConfig retrofit;
 
-    public CategoryRepository( Context context) {
-        super(context, "hertzdb-mobile", null, 3);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String sql =
-               "CREATE TABLE category ( " +
-                       "id CHAR(36) PRIMARY KEY, " +
-                       "description TEXT DEFAULT NULL, " +
-                       "price REAL DEFAULT NULL )";
-
-        db.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS category";
-        db.execSQL(sql);
-        onCreate(db);
+    public CategoryRepository(Context context) {
+        super(context);
     }
 
     public void saveOrUpdate(Category category) {
@@ -59,23 +42,24 @@ public class CategoryRepository extends SQLiteOpenHelper {
 
         RetrofitConfig retrofit = new RetrofitConfig();
 
-        //Salvando no SQLite.
-        getWritableDatabase().insert(queries.getTable(), null,
-                this.createCategory(category));
-
         //Salvando no servidor.
         retrofit.getRetrofit()
-                .create(ICategory.class)
-                .save(category)
+                .create(ICategory.class).save(category)
         .enqueue(new Callback<Category>() {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
 
+                Category category = response.body();
+
+                if(category != null) {
+                    getWritableDatabase().insert(TABLE_CATEGORY, null,
+                            createCategory(category));
+                }
             }
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
-
+                System.out.println("Deu erro!");
             }
         });
     }
@@ -84,24 +68,28 @@ public class CategoryRepository extends SQLiteOpenHelper {
 
         RetrofitConfig retrofit = new RetrofitConfig();
 
-        //Salvando no SQLite.
-        String whereClause = "id = ?";
-        String[] whereParams = { category.getId() };
-        getWritableDatabase()
-            .update(queries.getTable(), this.createCategory(category), whereClause, whereParams);
-
         //Salvando no servidor.
-        retrofit.getRetrofit()
-                .create(ICategory.class)
-                .update(category.getId(), category)
+        retrofit.getRetrofit().create(ICategory.class).update(category.getId(), category)
         .enqueue(new Callback<Category>() {
             @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
+            public void onResponse(@NonNull Call<Category> call,
+                                   @NonNull Response<Category> response) {
 
+                Category category = response.body();
+
+                if(category != null) {
+
+                    String whereClause = "id = ?";
+                    String[] whereParams = {category.getId()};
+
+                    getWritableDatabase()
+                            .update(TABLE_CATEGORY, createCategory(category), whereClause,
+                                    whereParams);
+                }
             }
 
             @Override
-            public void onFailure(Call<Category> call, Throwable t) {
+            public void onFailure(@NonNull Call<Category> call, @NonNull Throwable t) {
 
             }
         });

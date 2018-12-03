@@ -14,13 +14,22 @@ public class MenuRegisterActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_menu_register );
 
+        findViewById( R.id.btnRegisterManufacturer )
+                .setOnClickListener(v -> {
+                    Intent intent = new Intent(MenuRegisterActivity.this,
+                        ManufacturerActivityList.class);
+
+                    startActivity(intent);
+                }
+        );
+
         findViewById( R.id.btnRegisterCategory )
         .setOnClickListener(v -> {
-                Intent intent = new Intent(MenuRegisterActivity.this,
+                    Intent intent = new Intent(MenuRegisterActivity.this,
                         CategoryActivityList.class);
 
-                startActivity(intent);
-            }
+                    startActivity(intent);
+                }
         );
 
     }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:title="@string/manufacturers"
+        android:titleTextColor="@android:color/background_light"
+        android:touchscreenBlocksFocus="false"
+        android:transitionGroup="false" />
+
+    <ListView
+        android:id="@+id/txtViewManufacturers"
+        android:layout_width="395dp"
+        android:layout_height="587dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_below="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/btnAddNewManufacturer"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/add"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:text="@string/add"
+        android:textColor="#ffffff"
+        android:textColorLink="@color/colorPrimary"
+        android:textSize="30sp" />
+
+</RelativeLayout>

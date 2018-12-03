@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Model implements Serializable {
 
-    private long id;
+    private String id;
 
     private String name;
 
@@ -14,11 +14,11 @@ public class Model implements Serializable {
     private String description;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Model setId(long id) {
+    public Model setId(String id) {
         this.id = id;
         return this;
     }

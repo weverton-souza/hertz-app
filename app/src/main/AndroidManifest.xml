@@ -12,6 +12,7 @@
         android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.MainActivity">
@@ -24,6 +25,8 @@
         <activity android:name=".view.CategoryActivity" />
         <activity android:name=".view.MenuRegisterActivity" />
         <activity android:name=".view.CategoryActivityList" />
+        <activity android:name=".view.ManufacturerActivityList" />
+        <activity android:name=".view.ManufacturerActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

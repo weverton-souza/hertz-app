@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
-            android:hint="Preço"
+            android:hint="@string/pre_o"
             android:textSize="20sp"
             android:theme="@style/EditTextTheme">
 

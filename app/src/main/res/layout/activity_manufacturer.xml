@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/menu_register_category"/>
+
+    <include
+        layout="@layout/layout_manufacture_name" />
+
+    <include
+        layout="@layout/layout_manufacture_description" />
+
+</LinearLayout>

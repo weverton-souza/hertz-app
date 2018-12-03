@@ -34,6 +34,8 @@ public class CategoryActivityList extends AppCompatActivity {
                 startActivity(intent);
             }
         );
+
+        this.loadCategory();
     }
 
     private void loadCategory() {
@@ -52,7 +54,7 @@ public class CategoryActivityList extends AppCompatActivity {
     @Override
     protected void onResume()  {
         super.onResume();
-        loadCategory();
+        this.loadCategory();
     }
 
     @Override

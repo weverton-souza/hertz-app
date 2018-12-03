@@ -5,18 +5,18 @@ import java.util.Objects;
 
 public class Manufacturer implements Serializable {
 
-    private long id;
+    private String id;
 
     private String name;
 
     private String description;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Manufacturer setId(long id) {
+    public Manufacturer setId(String id) {
         this.id = id;
         return this;
     }
